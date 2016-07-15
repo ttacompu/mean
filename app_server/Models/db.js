@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 var dbURI = 'mongodb://localhost/Loc8r';
+if (process.env.NODE_ENV === 'production') {
+    dbURI = 'mongodb://ttacompu:*uger123@ds036789.mlab.com:36789/location'
+}
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
