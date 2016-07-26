@@ -41,7 +41,6 @@ module.exports = {
 
         Loc.geoNear(point, geoOptions, function (err, results, stats) {
             var locations = [];
-
             if (err) {
                 jsonResponse.sendJsonResponse(res, 404, err);
             } else {
@@ -56,7 +55,7 @@ module.exports = {
                     })
                 });
 
-                jsonResponse.sendJsonResponse(res, 200, { status: locations });
+                jsonResponse.sendJsonResponse(res, 200, locations);
             }
         });
     },
