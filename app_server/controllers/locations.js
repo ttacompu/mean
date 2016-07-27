@@ -9,11 +9,11 @@ if (process.env.NODE_ENV === 'production') {
 var renderHomepage = function (req, res, responseBody) {
     var message;
 
-    if(!(responseBody instanceof Array)){
-        message =  "API lookup error";
+    if (!(responseBody instanceof Array)) {
+        message = "API lookup error";
         responseBody = [];
-    }else{
-        if(!responseBody.length){
+    } else {
+        if (!responseBody.length) {
             message = "No places found nearby";
         }
     }
@@ -26,7 +26,7 @@ var renderHomepage = function (req, res, responseBody) {
         },
         sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
         locations: responseBody,
-        message : message
+        message: message
     });
 };
 
@@ -42,8 +42,8 @@ var _formatDistance = function (distance) {
     return numDistance + unit;
 };
 
+/* GET 'home' page */
 module.exports.homelist = function (req, res) {
-
     var requestOptions, path;
     path = '/api/locations';
     requestOptions = {
@@ -61,7 +61,6 @@ module.exports.homelist = function (req, res) {
         function (err, response, body) {
             var i, data;
             data = body;
-            console.log(err);
             if (response.statusCode === 200 && data.length) {
                 for (i = 0; i < data.length; i++) {
                     data[i].distance = _formatDistance(data[i].distance);
@@ -70,7 +69,9 @@ module.exports.homelist = function (req, res) {
             renderHomepage(req, res, data);
         }
     );
-}
+};
+
+
 
 
 

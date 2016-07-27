@@ -21,6 +21,7 @@ var theEarth = (function () {
 module.exports = {
 
     locationsListByDistance: function (req, res) {
+       
         var lng = parseFloat(req.query.lng);
         var lat = parseFloat(req.query.lat);
         var point = {
@@ -33,6 +34,8 @@ module.exports = {
             maxDistance: theEarth.getRadsFromDistance(20),
             num: 10
         }
+
+        
 
         if (!lng || !lat) {
             jsonResponse.sendJsonResponse(res, 404, { message: "lng and lat query parameters are required" });
