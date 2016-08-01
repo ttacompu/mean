@@ -5,29 +5,34 @@ html(ng-app='loc8rApp')
     title= title
     link(rel='stylesheet', href='/bootstrap/css/amelia.bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body 
+  body
     .navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
           a.navbar-brand(href='/') Loc8r
-          button.navbar-toggle(type='button', data-toggle='collapse' data-taget='#navbar-main')
-            span.icon.bar
-            span.icon.bar
-            span.icon.bar
-         #navbar-main.navbar-collapse.collapse
-            ul.nav.navbar-nav
-              li
-                a(href='/about/') About
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #navbar-main.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/about/') About
 
-  .container
-    block content
+    .container
+      div(ng-view)
+        block content
 
-    footer
-      .row
-        .col-xs-12
+      footer
+        .row
+          .col-xs-12
             small &copy; Thein Aung 2016
 
   script(src='/angular/angular.min.js')
-  script(src='/angular/loc8rApp.js')
+  script(src='/angular/angular-route.min.js')
+  script(src='/app.js')
+  script(src='/home/home.controller.js')
+  script(src='/common/services/loc8rData.service.js')
+  script(src='/common/services/geolocation.service.js')
   script(src='/javascripts/jquery-1.11.1.min.js')
   script(src='/bootstrap/js/bootstrap.min.js')

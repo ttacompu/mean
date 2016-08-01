@@ -1,5 +1,3 @@
-angular.module('loc8rApp', []);
-
 var _isNumeric = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
