@@ -5,6 +5,9 @@
 
     function homeCtrl($scope, loc8rData, geolocation) {
         var vm = this;
+        if (window.location.pathname !== '/') {
+            window.location.href = '/#' + window.location.pathname;
+        }
         vm.pageHeader = {
             title: 'Loc8r',
             strapline: 'Find places to work with wifi near you!'
@@ -43,7 +46,7 @@
 
 
     }
-homeCtrl.$inject = ['$scope', 'loc8rData', 'geolocation'];
+    homeCtrl.$inject = ['$scope', 'loc8rData', 'geolocation'];
 
 
 })();
