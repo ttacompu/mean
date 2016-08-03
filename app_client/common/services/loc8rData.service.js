@@ -1,20 +1,30 @@
-(function(){
-angular
-    .module('loc8rApp')
-    .service('loc8rData', loc8rData);
+(function () {
+    angular
+        .module('loc8rApp')
+        .service('loc8rData', loc8rData);
 
 
-function loc8rData($http) {
-    var locationByCoords = function (lat, lng) {
-        return $http.get('/api/locations?lng=' + lng + '&lat=' + lat +
-            '&maxDistance=20');
+    function loc8rData($http) {
+        var locationByCoords = function (lat, lng) {
+            return $http.get('/api/locations?lng=' + lng + '&lat=' + lat +
+                '&maxDistance=20');
         };
 
-    return {
-        locationByCoords: locationByCoords
-    };
+        var locationById = function(locationid){
+            return $http.get('/api/locations/' + locationid);
+        }
 
-}
+        var addReviewById = function(locationid, data){
+            return $http.post('/api/locations/' + locationid + '/reviews', data);
+        }
 
-loc8rData.$inject = ['$http'];
+        return {
+            locationByCoords: locationByCoords,
+            locationById : locationById,
+            addReviewById : addReviewById
+        };
+
+    }
+
+    loc8rData.$inject = ['$http'];
 })();
