@@ -2,8 +2,8 @@
     angular
         .module('loc8rApp')
         .controller('navigationCtrl', navigationCtrl);
-    navigationCtrl.$inject = ['$location', 'authentication'];
-    function navigationCtrl($location, authentication) {
+    navigationCtrl.$inject = ['$location', '$window', 'authentication'];
+    function navigationCtrl($location, $window, authentication) {
         var vm = this;
         vm.currentPath = $location.path();
         vm.isLoggedIn = authentication.isLoggedIn();
@@ -12,6 +12,7 @@
             console.log("logout not fire!!!");
             authentication.logout();
             $location.path('/');
+            $window.location.reload();
         };
 
 
