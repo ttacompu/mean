@@ -33,6 +33,7 @@ module.exports = {
 
     },
     login: function (req, res) {
+       
         if (!req.body.email || !req.body.password) {
             jsonResponse.sendJsonResponseNresponse(res, 400, {
                 "message": "All fields required"
@@ -42,14 +43,15 @@ module.exports = {
 
         passport.authenticate('local', function (err, user, info) {
             var token;
-
             if (err) {
+                console.log(err);
                 jsonResponse.sendJsonResponseresponse(res, 404, err);
                 return;
             }
 
             if (user) {
                 token = user.generateJwt();
+
                 jsonResponse.sendJsonResponse(res, 200, {"token": token});
             } else {
                 jsonResponse.sendJsonResponse(res, 401, info);

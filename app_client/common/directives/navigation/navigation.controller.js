@@ -9,6 +9,7 @@
         vm.isLoggedIn = authentication.isLoggedIn();
         vm.currentUser = authentication.currentUser();
         vm.logout = function () {
+            console.log("logout not fire!!!");
             authentication.logout();
             $location.path('/');
         };
