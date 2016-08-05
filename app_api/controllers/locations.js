@@ -19,6 +19,36 @@ var theEarth = (function () {
 })();
 
 module.exports = {
+    getAll: function (req, res) {
+        Loc.find({}, function(err, locations){
+            jsonResponse.sendJsonResponse(res, 200,locations);
+        });
+    },
+    updateAll: function (req, res) {
+        var delta=req.body.delta;
+        var lat = req.body.lat;
+        var lng = req.body.lng;
+        var latChange;
+        Loc.find({}, function(err, locations){
+            locations.forEach(function(location){
+                delta += delta;
+                if(!latChange){
+                    latChange=lat + delta;
+                }else{
+                    latChange += delta;
+                }
+              location.coords =[lng, latChange ];
+                location.save(function(err){
+                        console.log(err);
+                });
+                
+            })
+            
+        })
+
+        
+         jsonResponse.sendJsonResponse(res, 200,"success");
+    },
 
     locationsListByDistance: function (req, res) {
 

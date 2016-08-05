@@ -8,7 +8,14 @@ var auth = jwt({
 var ctrlLocations = require('../controllers/locations');
 var ctrlReviews = require('../controllers/reviews');
 var ctrlAuth = require('../controllers/authentication');
+var ctrlEnv =require('../controllers/env');
 
+// enviroment detection
+router.get('/env', ctrlEnv.getEnv)
+
+//all
+router.get('/all', ctrlLocations.getAll )
+router.put('/updateAll', ctrlLocations.updateAll )
 
 // locations
 router.get('/locations', ctrlLocations.locationsListByDistance);

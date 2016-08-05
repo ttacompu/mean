@@ -7,7 +7,7 @@
     function loc8rData($http, authentication) {
         var locationByCoords = function (lat, lng) {
             return $http.get('/api/locations?lng=' + lng + '&lat=' + lat +
-                '&maxDistance=20');
+                '&maxDistance=100');
         };
 
         var locationById = function (locationid) {
