@@ -2,7 +2,7 @@
 
     angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
-    var updateCoordInit=function(url){
+    var updateCoordInit=function($http, geolocation, url){
         var position = geolocation.getPosition(function (position) {
                     var lat = position.coords.latitude, lng = position.coords.longitude;
                     var increaseLat = 0.000000001;
@@ -16,9 +16,9 @@
         var envPromise = $http.get('http://localhost:3000/api/env');
         envPromise.then(function (env) {
             if (env === "production") {
-                updateCoordInit('https://vast-journey-36480.herokuapp.com/api/updateAll');
+                updateCoordInit($http, geolocation, 'https://vast-journey-36480.herokuapp.com/api/updateAll');
             }else{
-                updateCoordInit('http://localhost:3000/api/updateAll');
+                updateCoordInit($http, geolocation, 'http://localhost:3000/api/updateAll');
             } 
         })
 
