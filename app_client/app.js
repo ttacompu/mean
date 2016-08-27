@@ -11,7 +11,7 @@
                     if (!data.length) {
                         $http.post(url, {
                             name: "Starcups", address: "125 High Street, Reading, RG6 1PS",
-                            facilities: ' Hot drinks,Food,Premium wifi', lng: lng, lat: lat + increaseLat,
+                            facilities: ' Hot drinks,Food,Premium wifi', lng: lng, lat: lat,
                             days1: "Monday - Friday", opening1: "7:00am", closing1: "7:00pm", closed1: "false"
                         }).then(function () {
                             console.log("record added!!!");
