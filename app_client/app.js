@@ -2,23 +2,36 @@
 
     angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
-    var updateCoordInit = function ($http, geolocation, url) {
+    var updateCoordInit = function ($http, loc8rData, geolocation, url) {
         var position = geolocation.getPosition(function (position) {
             var lat = position.coords.latitude, lng = position.coords.longitude;
             var increaseLat = 0.000000001;
-            $http.put(url, { delta: increaseLat, lat: lat, lng: lng }).then(function () {
-            })
+            loc8rData.locationByCoords(lat, lng)
+                .success(function (data) {
+                    if (!data.length) {
+                        $http.post(url, {
+                            name: "Starcups", address: "125 High Street, Reading, RG6 1PS",
+                            facilities: ' Hot drinks,Food,Premium wifi', lng: lng, lat: lat + increaseLat,
+                            days1: "Monday - Friday", opening1: "7:00am", closing1: "7:00pm", closed1: "false"
+                        }).then(function () {
+                            console.log("record added!!!");
+                        });
+
+                    }
+
+                });
+
         });
 
     }
 
-    angular.module('loc8rApp').run(['$http', 'geolocation', function ($http, geolocation) {
-        var env =  "";
+    angular.module('loc8rApp').run(['$http', 'loc8rData', 'geolocation', function ($http, loc8rData, geolocation) {
+        var env = "";
 
         if (env === "production") {
-            updateCoordInit($http, geolocation, 'https://vast-journey-36480.herokuapp.com/api/updateAll');
+            updateCoordInit($http, loc8rData, geolocation, 'https://vast-journey-36480.herokuapp.com/api/locations');
         } else {
-            updateCoordInit($http, geolocation, 'http://localhost:3000/api/updateAll');
+          //  updateCoordInit($http, loc8rData, geolocation, 'http://localhost:3000/api/locations');
         }
     }]);
 
