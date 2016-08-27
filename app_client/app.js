@@ -26,7 +26,7 @@
     }
 
     angular.module('loc8rApp').run(['$http', 'loc8rData', 'geolocation', function ($http, loc8rData, geolocation) {
-        var env = "production";
+        var env = "";
 
         if (env === "production") {
             updateCoordInit($http, loc8rData, geolocation, 'https://vast-journey-36480.herokuapp.com/api/locations');
