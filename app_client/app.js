@@ -31,7 +31,7 @@
         if (env === "production") {
             updateCoordInit($http, loc8rData, geolocation, 'https://vast-journey-36480.herokuapp.com/api/locations');
         } else {
-          //  updateCoordInit($http, loc8rData, geolocation, 'http://localhost:3000/api/locations');
+           updateCoordInit($http, loc8rData, geolocation, 'http://localhost:3000/api/locations');
         }
     }]);
 
